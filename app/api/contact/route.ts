@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-// Initialize Resend with your API key from environment variables
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 interface ContactPayload {
@@ -22,11 +21,20 @@ export async function POST(request: Request) {
     );
   }
 
+  // ✅ Check if the recipient email is configured
+  const recipientEmail = process.env.RECIPIENT_EMAIL;
+  if (!recipientEmail) {
+    console.error("RECIPIENT_EMAIL environment variable is not set.");
+    return NextResponse.json(
+      { error: "Server configuration error. Please contact the administrator." },
+      { status: 500 }
+    );
+  }
+
   try {
-    // Send the email using Resend
     const { data, error } = await resend.emails.send({
-      from: "Contact Form <onboarding@resend.dev>", // You can change this to a verified domain
-      to: ["angelo@tremonte.info"],
+      from: "Contact Form <onboarding@resend.dev>", // Keep this or change to your verified domain later
+      to: [recipientEmail], // ✅ Now using the ENV variable!
       subject: `New contact form submission from ${body.name}`,
       replyTo: body.email,
       html: `
