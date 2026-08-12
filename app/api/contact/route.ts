@@ -21,7 +21,7 @@ export async function POST(request: Request) {
     );
   }
 
-  // ✅ Check if the recipient email is configured
+  // Check if the recipient email is configured
   const recipientEmail = process.env.RECIPIENT_EMAIL;
   if (!recipientEmail) {
     console.error("RECIPIENT_EMAIL environment variable is not set.");
@@ -31,10 +31,20 @@ export async function POST(request: Request) {
     );
   }
 
+  // Check if the sender (from) email is configured
+  const fromEmail = process.env.CONTACT_FROM_EMAIL;
+  if (!fromEmail) {
+    console.error("CONTACT_FROM_EMAIL environment variable is not set.");
+    return NextResponse.json(
+      { error: "Server configuration error. Please contact the administrator." },
+      { status: 500 }
+    );
+  }
+
   try {
     const { data, error } = await resend.emails.send({
-      from: "Contact Form <onboarding@resend.dev>", // Keep this or change to your verified domain later
-      to: [recipientEmail], // ✅ Now using the ENV variable!
+      from: fromEmail,
+      to: [recipientEmail],
       subject: `New contact form submission from ${body.name}`,
       replyTo: body.email,
       html: `
