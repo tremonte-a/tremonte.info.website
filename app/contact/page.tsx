@@ -24,18 +24,6 @@ export default function ContactPage() {
 
           <div className="mt-10 space-y-5 border-t border-line pt-8">
             <div className="flex items-start gap-3">
-              <Mail className="mt-0.5 h-4 w-4 text-rust" />
-              <div>
-                <p className="text-sm font-medium text-ink">Email</p>
-                <a
-                  href="mailto:angelo@tremonte.info"
-                  className="text-sm text-muted-foreground hover:text-rust"
-                >
-                  angelo@tremonte.info
-                </a>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
               <MapPin className="mt-0.5 h-4 w-4 text-rust" />
               <div>
                 <p className="text-sm font-medium text-ink">Location</p>
