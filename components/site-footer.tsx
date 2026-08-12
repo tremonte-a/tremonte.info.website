@@ -12,7 +12,7 @@ export function SiteFooter() {
             </p>
             <p className="mt-2 max-w-xs text-sm text-muted-foreground">
               Training, tech support, data analytics &amp; automation, video and
-              audio production. Based in British Columbia, Canada — working
+              audio production. Based in Ontario, Canada — working
               with clients everywhere.
             </p>
           </div>
@@ -42,8 +42,8 @@ export function SiteFooter() {
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><Link href="/contact" className="hover:text-rust">Book a consultation</Link></li>
               <li>
-                <a href="mailto:hello@angelotremonte.com" className="hover:text-rust">
-                  hello@angelotremonte.com
+                <a href="angelo@tremonte.info" className="hover:text-rust">
+                  angelo@tremonte.info
                 </a>
               </li>
             </ul>

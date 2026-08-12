@@ -28,10 +28,10 @@ export default function ContactPage() {
               <div>
                 <p className="text-sm font-medium text-ink">Email</p>
                 <a
-                  href="mailto:hello@angelotremonte.com"
+                  href="mailto:angelo@tremonte.info"
                   className="text-sm text-muted-foreground hover:text-rust"
                 >
-                  hello@angelotremonte.com
+                  angelo@tremonte.info
                 </a>
               </div>
             </div>
@@ -40,7 +40,7 @@ export default function ContactPage() {
               <div>
                 <p className="text-sm font-medium text-ink">Location</p>
                 <p className="text-sm text-muted-foreground">
-                  British Columbia, Canada — remote &amp; on-site
+                  Ontario, Canada — remote &amp; on-site
                 </p>
               </div>
             </div>
