@@ -9,8 +9,8 @@ Personal website and portfolio built with Next.js 15, React, TypeScript, and Tai
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/)
 - **UI Components:** [shadcn/ui](https://ui.shadcn.com/)
 - **Content:** Markdown (git-tracked)
-- **Email:** Resend / Nodemailer
-- **Deployment:** Docker / Vercel
+- **Email:** Resend 
+- **Deployment:** Docker
 
 ## Features
 
