@@ -6,13 +6,15 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+const SHOW_PORTFOLIO = false; // Change to true when ready
+
 const navItems = [
   { href: "/services", label: "Services" },
   { href: "/portfolio", label: "Portfolio" },
   { href: "/blog", label: "Writing" },
   { href: "/book", label: "Book" },
   { href: "/about", label: "About" },
-];
+].filter(item => item.href !== "/portfolio" || SHOW_PORTFOLIO);
 
 export function SiteHeader() {
   const pathname = usePathname();
