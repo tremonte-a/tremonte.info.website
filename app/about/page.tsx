@@ -54,7 +54,7 @@ export default function AboutPage() {
           Today I work independently, supporting nonprofits, small businesses,
           and larger organizations with training, tech support, data
           automation, and full-cycle production work. I&apos;m based in
-          British Columbia, Canada, and work with clients remotely and
+          Ontario, Canada, and work with clients remotely and
           on-site.
         </p>
       </div>
