@@ -12,16 +12,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Turnstile } from "next-turnstile"; // 👈 Added import
 
 type Status = "idle" | "loading" | "success" | "error";
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [service, setService] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null); // 👈 New state
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus("loading");
+
+    // Validate Turnstile token
+    if (!turnstileToken) {
+      setStatus("error");
+      // Optionally set an error message
+      return;
+    }
 
     const form = e.currentTarget;
     const formData = new FormData(form);
@@ -30,6 +39,7 @@ export function ContactForm() {
       email: formData.get("email"),
       service,
       message: formData.get("message"),
+      turnstileToken, // 👈 Include the token
     };
 
     try {
@@ -42,6 +52,7 @@ export function ContactForm() {
       setStatus("success");
       form.reset();
       setService("");
+      setTurnstileToken(null); // Reset token after success
     } catch {
       setStatus("error");
     }
@@ -121,9 +132,17 @@ export function ContactForm() {
         </div>
       )}
 
+      {/* 👇 Turnstile widget */}
+      <Turnstile
+        siteKey={process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY!}
+        onVerify={(token) => setTurnstileToken(token)}
+        onError={() => setStatus("error")}
+        onExpire={() => setTurnstileToken(null)}
+      />
+
       <button
         type="submit"
-        disabled={status === "loading"}
+        disabled={status === "loading" || !turnstileToken} // 👈 Disable until token is present
         className="inline-flex items-center gap-2 rounded-sm bg-rust px-6 py-3 font-mono text-xs uppercase tracking-[0.15em] text-primary-foreground transition-all hover:glow-btn disabled:opacity-60"
       >
         {status === "loading" && <Loader2 className="h-3.5 w-3.5 animate-spin" />}
