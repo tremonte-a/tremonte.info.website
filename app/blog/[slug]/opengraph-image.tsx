@@ -1,6 +1,6 @@
 // app/blog/[slug]/opengraph-image.tsx
 import { ImageResponse } from "next/og";
-import { getPost } from "@/lib/posts";
+import { getPost } from "../../../lib/posts";
 
 export const size = {
   width: 1200,
