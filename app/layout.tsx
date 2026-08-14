@@ -1,72 +1,75 @@
+// app/layout.tsx
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Fraunces, IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
-
+import { cn } from "@/lib/utils";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 
-// Self-hosted font files (see app/fonts/) — avoids fetching from Google Fonts
-// at build time, which fails in network-restricted CI/container environments.
-const fraunces = localFont({
+const fraunces = Fraunces({
   variable: "--font-fraunces",
+  subsets: ["latin"],
   display: "swap",
-  src: [
-    {
-      path: "./fonts/fraunces-variable.woff2",
-      weight: "400 600",
-      style: "normal",
-    },
-    {
-      path: "./fonts/fraunces-italic.woff2",
-      weight: "400",
-      style: "italic",
-    },
-  ],
 });
 
-const plexMono = localFont({
+const plexMono = IBM_Plex_Mono({
   variable: "--font-plex-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"],
   display: "swap",
-  src: [
-    { path: "./fonts/ibm-plex-mono-400.woff2", weight: "400", style: "normal" },
-    { path: "./fonts/ibm-plex-mono-500.woff2", weight: "500", style: "normal" },
-  ],
 });
 
-const plexSans = localFont({
+const plexSans = IBM_Plex_Sans({
   variable: "--font-plex-sans",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
   display: "swap",
-  src: [
-    {
-      path: "./fonts/ibm-plex-sans-variable.woff2",
-      weight: "400 600",
-      style: "normal",
-    },
-  ],
 });
 
 export const metadata: Metadata = {
-  title: "Angelo Tremonte — Training, Tech Support, Automation & Production",
-  description:
-    "30 years of hands-on technical expertise. Training, tech support, data analytics & automation, video and audio production for small businesses and nonprofits.",
+  metadataBase: new URL("https://tremonte.info"), // CHANGE THIS if your domain is different
+  title: {
+    default: "Tremonte.info",
+    template: "%s | Tremonte.info",
+  },
+  description: "Your blog description goes here.", // CHANGE THIS
+  openGraph: {
+    title: "Tremonte.info",
+    description: "Web development, systems design, and the art of debugging. Notes, guides, and deep dives from a developer building thoughtful software.",
+    url: "https://tremonte.info",
+    siteName: "Tremonte.info",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Tremonte.info",
+    description: "Web development, systems design, and the art of debugging. Notes, guides, and deep dives from a developer building thoughtful software.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${plexMono.variable} ${plexSans.variable}`}>
-      <body className="relative min-h-screen bg-paper text-ink antialiased">
-        <div className="bg-grain bg-noise" />
-        <div className="relative z-10 flex min-h-screen flex-col">
-          <SiteHeader />
-          <main className="flex-1">
-			{children}
-		  </main>
-          <SiteFooter />
-        </div>
+    <html lang="en" className={cn(fraunces.variable, plexMono.variable, plexSans.variable)}>
+      <body className="bg-background text-foreground font-sans antialiased">
+        <SiteHeader />
+        <main>{children}</main>
+        <SiteFooter />
       </body>
     </html>
   );
