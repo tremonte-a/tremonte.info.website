@@ -1,20 +1,16 @@
 // app/blog/[slug]/opengraph-image.tsx
-import { ImageResponse } from "next/og";
-import { getPost } from "../../../lib/posts";
+import { ImageResponse } from 'next/og';
+import { getPostMetadata } from '../../../lib/posts'; // <-- CHANGED
 
 export const size = {
   width: 1200,
   height: 630,
 };
 
-export const contentType = "image/png";
+export const contentType = 'image/png';
 
-export default async function OgImage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const post = getPost(params.slug);
+export default async function OgImage({ params }: { params: { slug: string } }) {
+  const post = getPostMetadata(params.slug); // <-- CHANGED
 
   if (!post) {
     return new ImageResponse(<div>Not Found</div>, size);
