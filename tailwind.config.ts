@@ -92,6 +92,19 @@ const config: Config = {
         "fade-up": "fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both",
         "pulse-glow": "pulse-glow 2.4s ease-in-out infinite",
       },
+	  typography: {
+        DEFAULT: {
+          css: {
+            td: {
+              color: "hsl(var(--foreground))", // uses your theme's light text color
+            },
+            // Optional: also style table headers for consistency
+            th: {
+              color: "hsl(var(--foreground))",
+            },
+          },
+        },
+      },
     },
   },
   plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
