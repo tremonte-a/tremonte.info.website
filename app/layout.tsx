@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import PageTransition from '@/components/page-transition'; 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 
@@ -61,7 +62,9 @@ export default function RootLayout({
         <div className="bg-grain bg-noise" />
         <div className="relative z-10 flex min-h-screen flex-col">
           <SiteHeader />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1">
+			<PageTransition>{children}</PageTransition>
+		  </main>
           <SiteFooter />
         </div>
       </body>
