@@ -4,7 +4,8 @@ import path from 'path';
 import matter from 'gray-matter';
 import { compileMDX } from 'next-mdx-remote/rsc';
 
-const postsDirectory = path.join(process.cwd(), 'content/posts');
+// CHANGE THIS LINE ↓
+const postsDirectory = path.join(process.cwd(), 'content/blog'); 
 
 export function getPostSlugs() {
   try {
@@ -15,7 +16,6 @@ export function getPostSlugs() {
   }
 }
 
-// ---- NEW: Lightweight function for metadata only (used by OG images) ----
 export function getPostMetadata(slug: string) {
   try {
     const fullPath = path.join(postsDirectory, `${slug}.mdx`);
@@ -35,7 +35,6 @@ export function getPostMetadata(slug: string) {
   }
 }
 
-// ---- Full function with MDX compilation (used by the blog page) ----
 export async function getPost(slug: string) {
   try {
     const fullPath = path.join(postsDirectory, `${slug}.mdx`);
