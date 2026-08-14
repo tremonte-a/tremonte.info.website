@@ -75,12 +75,12 @@ export default function HomePage() {
               Book a Consultation
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
-            <Link
+            /*<Link
               href="/portfolio"
               className="inline-flex items-center gap-2 rounded-sm border border-line px-6 py-3 font-mono text-xs uppercase tracking-[0.15em] text-ink transition-colors hover:border-rust hover:text-rust"
             >
               View the Portfolio
-            </Link>
+            </Link>*/
           </div>
         </div>
       </section>
