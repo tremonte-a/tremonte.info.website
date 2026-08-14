@@ -4,10 +4,11 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { format } from "date-fns";
 
-//export async function generateStaticParams() {
-//  const slugs = getPostSlugs();
-//  return slugs.map((slug) => ({ slug }));
-//}
+export async function generateStaticParams() {
+  const slugs = getPostSlugs();
+  console.log('📝 Found slugs:', slugs); // <-- ADD THIS
+  return slugs.map((slug) => ({ slug }));
+}
 
 type Props = {
   params: Promise<{ slug: string }>;
